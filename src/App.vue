@@ -1,6 +1,6 @@
 <template>
   <p>Sem a diretiva</p>
-  <p v-texto>Minha primeira diretiva customizada</p>
+  <p v-texto="{ cor: 'red', tamanhoFonte: '200%', totalCaracteres: 25 }">Minha primeira diretiva customizada</p>
   <p v-texto>Teste</p>
 </template>
 

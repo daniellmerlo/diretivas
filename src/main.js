@@ -4,17 +4,19 @@ import App from './App.vue'
 const Vue = createApp(App)
 
 Vue.directive('texto' ,{
-    created(el) { //chamado antes que os atributos do elemento ou ouvintes do event (event listeners) sejam aplicados
-        console.log(el)
-        el.style.color = 'red'
-        el.style.fontSize = '150%'
+    created(el, binding) { //chamado antes que os atributos do elemento ou ouvintes do event (event listeners) sejam aplicados
+        console.log(binding.value)
+        if(binding.value?.cor) el.style.color = binding.value.cor
+        if(binding.value?.tamanhoFonte) el.style.fontSize = binding.value.tamanhoFonte
+        let totalCaracteres = 25
+        if(binding.value?.totalCaracteres) totalCaracteres = binding.value.totalCaracteres
 
         let textoOriginal = el.innerText
         let tamanhoTextoOriginal = textoOriginal.length
         let textoAjustado = ''
 
-        if(tamanhoTextoOriginal > 25) {
-            textoAjustado = textoOriginal.substring(0, 22) + '...'
+        if(tamanhoTextoOriginal > totalCaracteres) {
+            textoAjustado = textoOriginal.substring(0, (totalCaracteres - 3)) + '...'
         } else {
             textoAjustado = textoOriginal
         }
